@@ -1,0 +1,6 @@
+- id: check-load-module-py
+  name: Check module loads
+  description: A pre-commit hook that just loads python module.
+  entry: check-load-module-py
+  language: python
+  files: \.py$

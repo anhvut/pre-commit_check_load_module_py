@@ -1,0 +1,11 @@
+[DEFAULT]
+logfile = /tmp/check_load_module.log
+
+[common]
+prefix = common/
+PYTHONPATH = common
+interpreter = ../../.venv/bin/python
+
+[app]
+prefix = app/
+PYTHONPATH = app:common

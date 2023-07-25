@@ -1,0 +1,12 @@
+[tool.poetry]
+name = "pre-commit_check_load_module_py"
+version = "0.0.1"
+description = "A pre-commit hook that just loads python module."
+authors = ["Anh-Vu Tran"]
+readme = "README.md"
+
+[tool.poetry.dependencies]
+python = "^3.9"
+
+[tool.poetry.group.dev.dependencies]
+pytest = "*"

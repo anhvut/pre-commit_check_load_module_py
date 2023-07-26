@@ -15,4 +15,4 @@ pytest = "*"
 minversion = "7.0"
 addopts = "-ra -q"
 testpaths = ["tests"]
-pythonpath = ["."]
+pythonpath = ["pre_commit_hook"]

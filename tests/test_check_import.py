@@ -1,6 +1,6 @@
 import os
 
-from pre_commit_hook.check_load_module import main
+from check_load_module import main
 
 
 def test_check_import():

@@ -67,7 +67,7 @@ def init_config(argv):
     if args.config_file and os.path.isfile(args.config_file):
         config = configparser.ConfigParser()
         config.read(args.config_file)
-        if (logfile := config.get('DEFAULT', 'logfile', fallback=None)) is not None:
+        if logfile := config.get('DEFAULT', 'logfile', fallback='').strip():
             file_handler = logging.FileHandler(logfile)
             file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)-8s %(message)s'))
             root_logger = logging.getLogger()

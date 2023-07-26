@@ -45,16 +45,22 @@ Add this content in `.pre-commit-config.yaml`:
 ```yaml
 repos:
   - repo: https://github.com/anhvut/pre-commit_check_load_module_py
-    rev: 0.0.2
+    rev: 0.0.3
     hooks:
       - id: check-load-module-py
         name: Check module loads
 ```
 
-Update hooks:
+Install hook:
 
 ```commandline
 pre-commit install-hooks
+```
+
+Update hook version
+
+```commandline
+pre-commit autoupdate
 ```
 
 ### Contribute to this hook

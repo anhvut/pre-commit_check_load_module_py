@@ -11,7 +11,7 @@ setup(
     name='pre-commit_check_load_module_py',
     description='A pre-commit hook that just loads python module.',
     url='https://github.com/anhvut/pre-commit_check_load_module_py',
-    version='0.0.4',
+    version='0.0.5',
 
     author='Anh-Vu Tran',
     author_email='anhvutran1@gmail.com',

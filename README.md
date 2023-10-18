@@ -45,7 +45,7 @@ Add this content in `.pre-commit-config.yaml`:
 ```yaml
 repos:
   - repo: https://github.com/anhvut/pre-commit_check_load_module_py
-    rev: 0.0.5
+    rev: 0.0.6
     hooks:
       - id: check-load-module-py
         name: Check module loads

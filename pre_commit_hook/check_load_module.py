@@ -59,7 +59,8 @@ def init_config(argv):
     import configparser
     parser = argparse.ArgumentParser()
     parser.add_argument('filenames', nargs='*', help='Filenames to run')
-    parser.add_argument('--config', '-c', action='store_true', dest='config_file', default='.check_load_module', help='Configuration file')
+    parser.add_argument('--config', '-c', action='store_true', dest='config_file', default='.check_load_module',
+                        help='Configuration file')
     args = parser.parse_args(argv)
 
     result = Config([], args.filenames)
@@ -71,18 +72,19 @@ def init_config(argv):
             file_handler = logging.FileHandler(logfile)
             file_handler.setFormatter(logging.Formatter('%(asctime)s %(levelname)-8s %(message)s'))
             root_logger = logging.getLogger()
-            if not [x for x in root_logger.handlers if isinstance(x, logging.FileHandler) and x.baseFilename == logfile]:
+            if not [x for x in root_logger.handlers if
+                    isinstance(x, logging.FileHandler) and x.baseFilename == logfile]:
                 root_logger.addHandler(file_handler)
         for section in config.sections():
-            pythonpath = config.get(section, 'PYTHONPATH', fallback='')
+            python_path = config.get(section, 'PYTHONPATH', fallback='')
             if IS_WINDOWS:
-                pythonpath = pythonpath.replace(':', ';')
+                python_path = python_path.replace(':', ';')
             else:
-                pythonpath = pythonpath.replace(';', ':')
+                python_path = python_path.replace(';', ':')
             result.prefixes.append(ConfigPrefix(
                 config.get(section, 'prefix', fallback=''),
                 config.get(section, 'interpreter', fallback=sys.executable),
-                pythonpath
+                python_path
             ))
     else:
         logging.info('No config file found, using default')
@@ -93,7 +95,7 @@ def init_config(argv):
 
 def main(argv=None):
     config = init_config(argv)
-    filenamesByPrefix = {}
+    filenames_by_prefix = {}
     for filename in config.filenames:
         prefix = None
         for config_prefix in config.prefixes:
@@ -101,13 +103,13 @@ def main(argv=None):
                 prefix = config_prefix.prefix
                 break
         if prefix is not None:
-            if (entry := filenamesByPrefix.get(prefix)) is None:
-                filenamesByPrefix[prefix] = entry = []
+            if (entry := filenames_by_prefix.get(prefix)) is None:
+                filenames_by_prefix[prefix] = entry = []
             entry.append(filename)
         else:
             logging.info(f'File {filename} do not match any prefix, ignored')
 
-    for [prefix, filenames] in filenamesByPrefix.items():
+    for [prefix, filenames] in filenames_by_prefix.items():
         logging.info(f'Checking {len(filenames)} files with prefix {prefix or "(none)"}')
 
         config_prefix = next(x for x in config.prefixes if x.prefix == prefix)
@@ -125,7 +127,8 @@ def dynamic_load(python_file_path):
                 f.write('    print("Checking " + f)\n')
                 f.write('    dynamic_load(f)\n')
 
-            ret = subprocess.run([config_prefix.interpreter, generated_script_filename], env=os.environ | {'PYTHONPATH': config_prefix.pythonpath})
+            ret = subprocess.run([config_prefix.interpreter, generated_script_filename],
+                                 env=os.environ | {'PYTHONPATH': config_prefix.pythonpath})
             logging.info(f'ret = {ret}')
             if ret.returncode != 0:
                 return ret.returncode

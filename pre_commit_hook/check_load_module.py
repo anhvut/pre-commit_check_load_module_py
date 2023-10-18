@@ -93,16 +93,12 @@ def init_config(argv):
     return result
 
 
-def consolidate_interpreter_path(org_path):
-    if os.path.exists(org_path):
-        return org_path
-    without_ext, ext = os.path.splitext(org_path)
-    if os.path.exists(without_ext):
-        return without_ext
-    if os.path.exists(without_ext + '.exe'):
-        return without_ext + '.exe'
-    if os.path.exists(without_ext + '.EXE'):
-        return without_ext + '.EXE'
+def consolidate_interpreter_path(org_paths):
+    for item in org_paths.split(','):
+        candidate = item.strip()
+        if os.path.exists(candidate):
+            return candidate
+    return org_paths
 
 
 def main(argv=None):

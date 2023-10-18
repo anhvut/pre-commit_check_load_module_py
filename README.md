@@ -34,6 +34,8 @@ prefix = app/
 # separate folders with colon or semi-colon, it will be adapted depending on platform
 PYTHONPATH = app:common
 # if no interpreter specified, the default interpreter will be used
+# for Windows/Linux compatibility, interpreter can have several values separated by a coma
+# e.g. interpreter = .venv/bin/python, .venv/Scripts/python.exe
 ```
 
 In this example, modules in `app/` can import modules in `common/` but the inverse is not possible.

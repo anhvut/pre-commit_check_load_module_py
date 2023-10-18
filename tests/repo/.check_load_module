@@ -4,7 +4,7 @@ logfile = /tmp/check_load_module.log
 [common]
 prefix = common/
 PYTHONPATH = common
-interpreter = ../../.venv/bin/python
+interpreter = ../../.venv/Scripts/python.exe, ../../.venv/bin/python
 
 [app]
 prefix = app/

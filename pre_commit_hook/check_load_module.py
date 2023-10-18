@@ -125,7 +125,7 @@ def dynamic_load(python_file_path):
                 f.write('    print("Checking " + f)\n')
                 f.write('    dynamic_load(f)\n')
 
-            ret = subprocess.run([config_prefix.interpreter, generated_script_filename], env={'PYTHONPATH': config_prefix.pythonpath})
+            ret = subprocess.run([config_prefix.interpreter, generated_script_filename], env=os.environ | {'PYTHONPATH': config_prefix.pythonpath})
             logging.info(f'ret = {ret}')
             if ret.returncode != 0:
                 return ret.returncode
